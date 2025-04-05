@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Match</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@400;500;600&family=Abyssinica+SIL&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="search.css">
+</head>
+<body>
+    <main class="main-container">
+        <header class="header">
+            <div class="logo-container">
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/7387288f561c5abfc229e8e25a5254d5e770b656" alt="" class="logo-image">
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/51badf032b9702ce0f5f921203e3e3ff33361d49" alt="Research Match" class="brand-text">
+            </div>
+            <nav class="main-nav">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#how-it-works" class="nav-link">How it works</a>
+                <div class="profile-circle">
+                    <svg width="70" height="59" viewBox="0 0 70 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <ellipse cx="35" cy="29.5" rx="35" ry="29.5" fill="#FCFCFC"></ellipse>
+                    </svg>
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/03961ef43cf487fbfd5436c4d9fe688589c1420a" alt="" class="profile-image">
+                </div>
+            </nav>
+            <button class="menu-button" aria-label="Menu">
+                <i class="ti ti-menu-2"></i>
+            </button>
+        </header>
+
+        <div id="search" class="search-bar">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/c0a45c7d46b955288621c4a19b9ad8d200ede5c2" alt="" class="search-icon">
+            <input type="text" placeholder="Search..." class="search-input" aria-label="Search researchers">
+        </div>
+
+        <section class="researcher-grid">
+            <article class="researcher-card">
+                <div class="researcher-content">
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/477e562c861da75ffc83e10d2ffbf1089f53ba26" alt="Jane Doe's profile" class="researcher-photo">
+                    <div class="researcher-info">
+                        <h2 class="researcher-name">Jane Doe</h2>
+                        <h3 class="researcher-title">Associate Professor of Computer Science</h3>
+                        <p class="researcher-description">Research in Artificial Intelligence and Machine Learning</p>
+                        <div class="tag-list">
+                            <span class="tag">Artificial Intelligence</span>
+                            <span class="tag">Machine Learning</span>
+                        </div>
+                        <button class="view-more">View More</button>
+                    </div>
+                </div>
+            </article>
+
+            <article class="researcher-card">
+                <div class="researcher-content">
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/477e562c861da75ffc83e10d2ffbf1089f53ba26" alt="John Smith's profile" class="researcher-photo">
+                    <div class="researcher-info">
+                        <h2 class="researcher-name">John Smith</h2>
+                        <h3 class="researcher-title">Professor Electrical Engineering</h3>
+                        <p class="researcher-description">Research interests on robotics, and control systems.</p>
+                        <div class="tag-list">
+                            <span class="tag">Robotics</span>
+                            <span class="tag">Control Systems</span>
+                        </div>
+                        <button class="view-more">View More</button>
+                    </div>
+                </div>
+            </article>
+
+            <article class="researcher-card">
+                <div class="researcher-content">
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/477e562c861da75ffc83e10d2ffbf1089f53ba26" alt="Emily Johnson's profile" class="researcher-photo">
+                    <div class="researcher-info">
+                        <h2 class="researcher-name">Emily Johnson</h2>
+                        <h3 class="researcher-title">Assistant Professor Mechanical Engineering</h3>
+                        <p class="researcher-description">Research on fluid dynamics and heat transfer.</p>
+                        <div class="tag-list">
+                            <span class="tag">Fluid Dynamics</span>
+                            <span class="tag">Heat Transfer</span>
+                        </div>
+                        <button class="view-more">View More</button>
+                    </div>
+                </div>
+            </article>
+
+            <article class="researcher-card">
+                <div class="researcher-content">
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/477e562c861da75ffc83e10d2ffbf1089f53ba26" alt="Michael Brown's profile" class="researcher-photo">
+                    <div class="researcher-info">
+                        <h2 class="researcher-name">Micheal Brown</h2>
+                        <h3 class="researcher-title">Associate Professor of Bioengineering</h3>
+                        <p class="researcher-description">Research on biomedical imaging and biomaterials.</p>
+                        <div class="tag-list">
+                            <span class="tag">Biomedical Imaging</span>
+                            <span class="tag">Biomaterials</span>
+                        </div>
+                        <button class="view-more">View More</button>
+                    </div>
+                </div>
+            </article>
+        </section>
+    </main>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+          const hash = window.location.hash;
+      
+          if (hash === "#search") {
+            // Delay to ensure layout is complete
+            setTimeout(() => {
+              const target = document.querySelector(hash);
+              if (target) {
+                target.scrollIntoView({ behavior: "smooth" });
+              }
+            }, 100);
+          }
+        });
+      </script>
+</body>
+</html>
