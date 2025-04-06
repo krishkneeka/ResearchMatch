@@ -31,11 +31,13 @@ body.dark-mode .logo-image {
     content: url('researchmatch.png');
     height: auto;
     width: auto;
-    max-height: 49px;
+    max-height: 100px;
 }
 
 body.dark-mode .logo {
     content: url('favicon.png');
+    height: 100;
+    width: 50;
 }
 
 body.dark-mode .nav-link,
