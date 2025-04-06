@@ -136,6 +136,23 @@
         (p.department && p.department.toLowerCase().includes(query))
       );
     }
+
+    function extractField(title) {
+  const parts = title.split("-");
+  if (parts.length > 1) {
+    return parts[1].trim(); // Gets the part after the dash
+  }
+
+  // Fallbacks based on keywords
+  if (title.toLowerCase().includes("engineering")) return "Engineering";
+  if (title.toLowerCase().includes("computer")) return "Computer Science";
+  if (title.toLowerCase().includes("chemistry")) return "Chemistry";
+  if (title.toLowerCase().includes("biology")) return "Biology";
+  if (title.toLowerCase().includes("mathematics")) return "Mathematics";
+
+  return "your field of expertise";
+}
+
   
     // Display cards
     function displayResults(results) {
@@ -168,6 +185,7 @@
       });
     }
     function openEmailBuilder(prof) {
+      const field = extractField(prof.title);
   // Remove any existing modal
   const existingModal = document.querySelector(".email-modal");
   if (existingModal) existingModal.remove();
@@ -177,18 +195,20 @@
   modal.innerHTML = `
     <div class="email-content">
       <h2>Contact ${prof.name}</h2>
-      <textarea rows="10" class="email-box">
+  <textarea rows="10" class="email-box">
 Dear Professor ${prof.name.split(" ")[1] || prof.name},
 
-My name is [Your Name], and I’m an undergraduate student at UTD majoring in [Your Major]. I recently came across your work as a ${prof.title}, and I’m really interested in your research.
+My name is [Your Name], and I’m an undergraduate student at UT Dallas majoring in [Your Major]. I came across your profile and noticed your work in ${field}, which aligns closely with my academic interests.
 
-I’d love to learn more and potentially get involved. Please let me know if you are open to speaking or accepting students.
+I’m currently looking to gain research experience and would love to learn more about any opportunities you may have available — now or in the future. Your position as a ${prof.title} at UTD really stood out to me, and I’d be excited to connect further.
 
 Thank you for your time!
 
 Best regards,  
-[Your Name]  
-      </textarea>
+[Your Name]
+</textarea>
+
+
       <div class="email-actions">
         <a href="mailto:${prof.email}" target="_blank" class="send-email">Send Email</a>
         <button onclick="copyEmailTemplate()">Copy</button>
