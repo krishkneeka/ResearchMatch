@@ -5,8 +5,8 @@ toggle.addEventListener("click", () => {
 
   // Optional: change icon image
   if (document.body.classList.contains("dark-mode")) {
-    toggle.src = "lightbulb-dark.png"; // <- use a dark mode bulb icon if you have one
+    toggle.src = "darkmode.png"; // <- use a dark mode bulb icon if you have one
   } else {
-    toggle.src = "lightbulb.png"; // <- normal bulb icon
+    toggle.src = "https://cdn.builder.io/api/v1/image/assets/TEMP/03961ef43cf487fbfd5436c4d9fe688589c1420a"; // <- normal bulb icon
   }
 });

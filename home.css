@@ -24,6 +24,22 @@
   body.dark-mode .landing-page {
     background-color: #121212;
   }
+
+  .light-logo {
+    display: block;
+  }
+  .dark-logo {
+    display: none;
+  }
+  
+  body.dark-mode .light-logo {
+    display: none;
+  }
+  body.dark-mode .dark-logo {
+    display: block;
+    max-height: 100px;
+  }
+  
   
   /* Header */
   .header {
@@ -45,10 +61,11 @@
   }
   
   .header__brand {
-    height: 49px;
-    width: 322px;
+    height: auto;
+    width: auto;
+    max-height: 49px; /* keeps height consistent */
   }
-  
+
   /* Navigation */
   .navigation {
     display: flex;
@@ -166,8 +183,11 @@
   
   @media (max-width: 640px) {
     .header__brand {
-      width: 200px;
+      height: auto;
+      width: auto;
+      max-height: 49px; /* keeps height consistent */
     }
+    
   
     .navigation {
       display: none;
