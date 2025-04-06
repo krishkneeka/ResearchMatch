@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import json
+import time
 
 BASE_URL = "https://profiles.utdallas.edu"
 BROWSE_URL = f"{BASE_URL}/browse"
@@ -8,52 +9,58 @@ HEADERS = {"User-Agent": "Mozilla/5.0"}
 
 all_professors = []
 
-# Loop through the first N pages
-for page in range(1, 53):  # Increase range as needed
+for page in range(1, 54):  # 53 total
     print(f"Scraping page {page}")
-    response = requests.get(f"{BROWSE_URL}?page={page}", headers=HEADERS)
-    soup = BeautifulSoup(response.text, 'html.parser')
+    res = requests.get(f"{BROWSE_URL}?page={page}", headers=HEADERS)
+    soup = BeautifulSoup(res.text, "html.parser")
 
-    people = soup.select('div.media-body')  # Container holding each profile
+    cards = soup.select(".card.profile-card")
 
-    for person in people:
+    for card in cards:
         try:
-            link_tag = person.find('a', href=True)
-            if not link_tag:
+            name_tag = card.select_one(".profile-name a")
+            title_tag = card.select_one(".profile-title")
+            img_tag = card.select_one("img.card-img-top")
+
+            if not name_tag or not title_tag:
                 continue
 
-            name = link_tag.text.strip()
-            profile_path = link_tag['href'].strip()
-            profile_url = BASE_URL + profile_path
+            name = name_tag.get_text(strip=True)
+            relative_url = name_tag.get("href", "")
+            profile_url = relative_url if relative_url.startswith("http") else BASE_URL + relative_url
 
-            title = person.find('p').text.strip()
+            title = title_tag.get_text(strip=True)
+            image_url = img_tag["src"].strip()
+            if not image_url.startswith("http"):
+                image_url = BASE_URL + image_url
 
-            # Now get profile image and tags from profile page
-            profile_response = requests.get(profile_url, headers=HEADERS)
-            profile_soup = BeautifulSoup(profile_response.text, 'html.parser')
-
-            img_tag = profile_soup.find('img', class_='profile-image')
-            image_url = BASE_URL + img_tag['src'] if img_tag else BASE_URL + "/img/default.png"
-
-            # Try to grab tags from profile page
+            # Now visit the individual profile page for tags
             tags = []
-            tag_elements = profile_soup.select('.tag, .field-of-study a')
-            for tag in tag_elements:
-                tags.append(tag.text.strip())
+            try:
+                profile_res = requests.get(profile_url, headers=HEADERS)
+                profile_soup = BeautifulSoup(profile_res.text, "html.parser")
 
-            professor_data = {
+                tag_elements = profile_soup.select(".field-of-study a, .tag")
+                tags = [t.get_text(strip=True) for t in tag_elements]
+
+            except Exception as inner_err:
+                print(f"⚠️ Couldn’t fetch tags from profile {profile_url}: {inner_err}")
+
+            all_professors.append({
                 "name": name,
                 "title": title,
                 "profileUrl": profile_url,
                 "image": image_url,
                 "tags": tags
-            }
+            })
 
-            all_professors.append(professor_data)
-        
-        except Exception as e:
-            print(f"Error scraping a profile: {e}")
+            time.sleep(0.3)  # Be nice to their server
 
-# Save to JSON
-with open("professors.json", "w", encoding='utf-8') as f:
-    json.dump(all_professors, f, indent=2)
+        except Exception as outer_err:
+            print(f"❌ Error on page {page}: {outer_err}")
+
+# Save to file
+with open("professors_full.json", "w", encoding="utf-8") as f:
+    json.dump(all_professors, f, indent=2, ensure_ascii=False)
+
+print("✅ Done scraping. Data saved to professors_full.json")

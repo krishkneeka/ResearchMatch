@@ -121,7 +121,7 @@
   
     // Load JSON data
     async function loadProfessors() {
-      const res = await fetch("professors.json");
+      const res = await fetch("professors_full.json");
       const data = await res.json();
       allProfessors = data;
     }
@@ -145,18 +145,20 @@
         const card = document.createElement("article");
         card.className = "researcher-card";
         card.innerHTML = `
-          <div class="researcher-content">
-            <img src="${p.image || 'https://cdn-icons-png.flaticon.com/512/1946/1946429.png'}" 
-                 alt="${p.name}" 
-                 class="researcher-photo">
-            <div class="researcher-info">
-              <h2 class="researcher-name">${p.name}</h2>
-              <h3 class="researcher-title">${p.title || "Professor at UTD"}</h3>
-              <p class="researcher-description">${p.department || "See profile for more info"}</p>
-              <a href="${p.profileUrl}" target="_blank" class="view-more">View Profile</a>
-            </div>
-          </div>
-        `;
+  <div class="researcher-content">
+    <img src="${p.image}" alt="${p.name}" class="researcher-photo">
+    <div class="researcher-info">
+      <h2 class="researcher-name">${p.name}</h2>
+      <h3 class="researcher-title">${p.title}</h3>
+      <p class="researcher-description">${p.tags?.join(", ") || "See profile for more info"}</p>
+      <div class="tag-list">
+        ${p.tags.map(tag => `<span class="tag">${tag}</span>`).join("")}
+      </div>
+      <a href="${p.profileUrl}" target="_blank" class="view-more">View Profile</a>
+    </div>
+  </div>
+`;
+
         grid.appendChild(card);
       });
     }
