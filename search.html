@@ -122,7 +122,7 @@
   
     // Load JSON data
     async function loadProfessors() {
-      const res = await fetch("professors_full.json");
+      const res = await fetch("professors_with_emails.json");
       const data = await res.json();
       allProfessors = data;
     }
@@ -153,16 +153,72 @@
       <h3 class="researcher-title">${p.title}</h3>
       <p class="researcher-description">${p.tags?.join(", ") || "See profile for more info"}</p>
       <div class="tag-list">
-        ${p.tags.map(tag => `<span class="tag">${tag}</span>`).join("")}
+        ${(p.tags || []).map(tag => `<span class="tag">${tag}</span>`).join("")}
       </div>
-      <a href="${p.profileUrl}" target="_blank" class="view-more">View Profile</a>
+      <div class="action-buttons">
+        <a href="${p.profileUrl}" target="_blank" class="view-more">View Profile</a>
+        <button onclick='openEmailBuilder(${JSON.stringify(p)})'>I’m Interested</button>
+      </div>
     </div>
   </div>
 `;
 
+
         grid.appendChild(card);
       });
     }
+    function openEmailBuilder(prof) {
+  // Remove any existing modal
+  const existingModal = document.querySelector(".email-modal");
+  if (existingModal) existingModal.remove();
+
+  const modal = document.createElement("div");
+  modal.className = "email-modal";
+  modal.innerHTML = `
+    <div class="email-content">
+      <h2>Contact ${prof.name}</h2>
+      <textarea rows="10" class="email-box">
+Dear Professor ${prof.name.split(" ")[1] || prof.name},
+
+My name is [Your Name], and I’m an undergraduate student at UTD majoring in [Your Major]. I recently came across your work as a ${prof.title}, and I’m really interested in your research.
+
+I’d love to learn more and potentially get involved. Please let me know if you are open to speaking or accepting students.
+
+Thank you for your time!
+
+Best regards,  
+[Your Name]  
+      </textarea>
+      <div class="email-actions">
+        <a href="mailto:${prof.email}" target="_blank" class="send-email">Send Email</a>
+        <button onclick="copyEmailTemplate()">Copy</button>
+        <button onclick="closeModal()">Close</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+}
+
+function closeModal() {
+  const modal = document.querySelector(".email-modal");
+  if (modal) {
+    modal.remove();
+  }
+}
+
+function copyEmailTemplate() {
+  const text = document.querySelector(".email-box");
+  navigator.clipboard.writeText(text.value);
+  alert("Copied to clipboard!");
+}
+
+
+function copyEmailTemplate() {
+  const text = document.querySelector(".email-box");
+  navigator.clipboard.writeText(text.value);
+  alert("Copied to clipboard!");
+}
+
   
     // Load and filter on input
     document.addEventListener("DOMContentLoaded", async () => {

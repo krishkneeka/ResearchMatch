@@ -9,7 +9,7 @@ HEADERS = {"User-Agent": "Mozilla/5.0"}
 
 all_professors = []
 
-for page in range(1, 54):  # 53 total
+for page in range(1, 54):  # all 53 pages
     print(f"Scraping page {page}")
     res = requests.get(f"{BROWSE_URL}?page={page}", headers=HEADERS)
     soup = BeautifulSoup(res.text, "html.parser")
@@ -25,42 +25,48 @@ for page in range(1, 54):  # 53 total
             if not name_tag or not title_tag:
                 continue
 
-            name = name_tag.get_text(strip=True)
-            relative_url = name_tag.get("href", "")
-            profile_url = relative_url if relative_url.startswith("http") else BASE_URL + relative_url
-
-            title = title_tag.get_text(strip=True)
+            name = name_tag.text.strip()
+            profile_path = name_tag["href"].strip()
+            profile_url = profile_path if profile_path.startswith("http") else BASE_URL + profile_path
+            title = title_tag.text.strip()
             image_url = img_tag["src"].strip()
             if not image_url.startswith("http"):
                 image_url = BASE_URL + image_url
 
-            # Now visit the individual profile page for tags
-            tags = []
-            try:
-                profile_res = requests.get(profile_url, headers=HEADERS)
-                profile_soup = BeautifulSoup(profile_res.text, "html.parser")
+            # Visit profile page for email + tags
+            profile_res = requests.get(profile_url, headers=HEADERS)
+            profile_soup = BeautifulSoup(profile_res.text, "html.parser")
 
-                tag_elements = profile_soup.select(".field-of-study a, .tag")
-                tags = [t.get_text(strip=True) for t in tag_elements]
+            # ✨ Extract email
+            email_tag = profile_soup.select_one('a[href^="mailto:"]')
+            email = ""
+            if email_tag:
+                href = email_tag.get("href", "")
+            if href.startswith("mailto:"):
+                email = href.replace("mailto:", "").strip()
 
-            except Exception as inner_err:
-                print(f"⚠️ Couldn’t fetch tags from profile {profile_url}: {inner_err}")
 
+            # ✨ Extract tags (if still needed)
+            tag_elements = profile_soup.select(".tag, .field-of-study a")
+            tags = [tag.text.strip() for tag in tag_elements]
+
+            # Build final professor dict
             all_professors.append({
                 "name": name,
                 "title": title,
                 "profileUrl": profile_url,
                 "image": image_url,
-                "tags": tags
+                "tags": tags,
+                "email": email
             })
 
-            time.sleep(0.3)  # Be nice to their server
+            time.sleep(0.3)  # be kind to the server
 
-        except Exception as outer_err:
-            print(f"❌ Error on page {page}: {outer_err}")
+        except Exception as e:
+            print(f"❌ Error: {e}")
 
-# Save to file
-with open("professors_full.json", "w", encoding="utf-8") as f:
+# Save to JSON
+with open("professors_with_emails.json", "w", encoding="utf-8") as f:
     json.dump(all_professors, f, indent=2, ensure_ascii=False)
 
-print("✅ Done scraping. Data saved to professors_full.json")
+print("✅ Done! Data saved to professors_with_emails.json")
