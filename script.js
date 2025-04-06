@@ -1,18 +1,12 @@
-const toggleTarget = document.getElementById('darkModeToggle');
+const toggle = document.getElementById("darkModeToggle");
 
-function setDarkMode(isDark) {
-  document.body.classList.toggle('dark-mode', isDark);
-  localStorage.setItem('darkMode', isDark ? 'enabled' : 'disabled');
-}
+toggle.addEventListener("click", () => {
+  document.body.classList.toggle("dark-mode");
 
-// On load
-if (localStorage.getItem('darkMode') === 'enabled') {
-  setDarkMode(true);
-}
-
-// On click
-toggleTarget.addEventListener('click', () => {
-  const isDark = !document.body.classList.contains('dark-mode');
-  setDarkMode(isDark);
+  // Optional: change icon image
+  if (document.body.classList.contains("dark-mode")) {
+    toggle.src = "lightbulb-dark.png"; // <- use a dark mode bulb icon if you have one
+  } else {
+    toggle.src = "lightbulb.png"; // <- normal bulb icon
+  }
 });
-
