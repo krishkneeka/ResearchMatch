@@ -1,171 +1,146 @@
-/* Base styles */
-* {
+:root {
+    --accent: #4c6ef5;
+    --bg: #f3f4f6;
+    --dark: #111827;
+    --text: #1f2937;
+    --card-bg: #ffffff;
+    --card-shadow: rgba(0, 0, 0, 0.06);
+  }
+  
+  * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-body {
-    font-family: system-ui, -apple-system, sans-serif;
-}
-
-.container {
+  }
+  
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+  }
+  
+  .container {
     width: 100%;
     min-height: 100vh;
-    background-color: rgb(209 250 229);
-}
-
-/* Header styles */
-.header {
-    display: flex;
-    position: relative;
-    align-items: center;
-    padding: 0 6rem;
-    height: 91px;
-}
-
-.logo {
-    height: 91px;
-    width: 91px;
-}
-
-.logo-text {
-    height: 49px;
-}
-
-.navigation {
-    display: flex;
-    gap: 5rem;
-    margin-left: auto;
-}
-
-.navigation a {
-    font-size: 1.875rem;
-    color: black;
-    text-decoration: none;
-}
-
-.light-icon-container {
-    position: relative;
-    margin-left: 6rem;
-}
-
-.light-icon {
-    position: absolute;
-    top: -1px;
-    left: 0.25rem;
-    height: 61px;
-    width: 61px;
-}
-
-/* Hero section styles */
-.hero {
-    padding: 2.5rem 0;
-    text-align: center;
-    background-color: #9ca3af;
-}
-
-.hero h1 {
-    margin-bottom: 1.25rem;
-    font-size: 4.5rem;
-    color: black;
-}
-
-.hero p {
-    margin: 0 auto;
-    font-size: 2.25rem;
-    color: black;
-    max-width: 770px;
-}
-
-/* Content section styles */
-.content {
-    padding: 2.75rem 5rem;
-}
-
-.mission {
-    margin-bottom: 2.5rem;
-    font-size: 2.25rem;
-    color: black;
-}
-
-.what-we-do {
-    font-size: 2.25rem;
-    color: black;
-}
-
-.what-we-do h2 {
-    margin-bottom: 1.25rem;
-}
-
-.what-we-do ul {
     display: flex;
     flex-direction: column;
-    gap: 0.625rem;
+    background: linear-gradient(to bottom right, #e0f2fe, #e0fce4);
+  }
+  
+  /* Header */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 3rem;
+    background-color: white;
+    box-shadow: 0 4px 12px var(--card-shadow);
+  }
+  
+  .logo {
+    height: 60px;
+  }
+  
+  .logo-text {
+    height: 40px;
+    margin-left: 10px;
+  }
+  
+  .navigation a {
+    margin-left: 2rem;
+    font-size: 1.1rem;
+    color: var(--dark);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  
+  .navigation a:hover {
+    color: var(--accent);
+  }
+  
+  .light-icon-container img {
+    height: 48px;
+  }
+  
+  /* Hero section */
+  .hero {
+    padding: 4rem 2rem;
+    background: linear-gradient(145deg, #c7d2fe, #d1fae5);
+    text-align: center;
+  }
+  
+  .hero h1 {
+    font-size: 3.5rem;
+    color: var(--dark);
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+  
+  .hero p {
+    font-size: 1.5rem;
+    max-width: 700px;
+    margin: 0 auto;
+    color: #374151;
+  }
+  
+  /* Main content */
+  .content {
+    padding: 3rem 5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .mission {
+    font-size: 1.375rem;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+    color: #1f2937;
+  }
+  
+  .what-we-do h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--accent);
+  }
+  
+  .what-we-do ul {
     list-style: none;
-}
-
-/* Responsive styles */
-@media (max-width: 768px) {
-    .header {
-        padding: 0 1.25rem;
-    }
-
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .what-we-do li {
+    font-size: 1.25rem;
+    background: var(--card-bg);
+    padding: 1rem 1.25rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px var(--card-shadow);
+    transition: transform 0.2s ease;
+  }
+  
+  .what-we-do li:hover {
+    transform: translateY(-4px);
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
     .navigation {
-        gap: 2rem;
+      display: none;
     }
-
-    .navigation a {
-        font-size: 1.5rem;
-    }
-
-    .hero h1 {
-        font-size: 3rem;
-    }
-
-    .hero p {
-        padding: 0 1.25rem;
-        font-size: 1.875rem;
-    }
-
+  
     .content {
-        padding: 2rem 1.25rem;
+      padding: 2rem 1.25rem;
     }
-}
-
-@media (max-width: 640px) {
-    .header {
-        padding: 0 1rem;
-        height: 70px;
-    }
-
-    .logo {
-        height: 2.5rem;
-        width: auto;
-    }
-
-    .logo-text {
-        height: 2.5rem;
-    }
-
-    .navigation {
-        display: none;
-    }
-
-    .light-icon-container {
-        margin-left: auto;
-    }
-
+  
     .hero h1 {
-        font-size: 2.25rem;
+      font-size: 2.5rem;
     }
-
+  
     .hero p {
-        font-size: 1.5rem;
+      font-size: 1.125rem;
     }
-
-    .mission,
-    .what-we-do {
-        font-size: 1.25rem;
-    }
-}
+  }
+  
