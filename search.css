@@ -13,7 +13,7 @@
   .main-container {
     padding: 1.5rem;
     width: 100%;
-    background-color: rgb(209 250 229);
+    background: linear-gradient(to bottom right, #c7d2fe, #d1fae5);
     min-height: 100vh;
   }
   
