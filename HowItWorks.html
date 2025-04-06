@@ -5,58 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Research Match - How it Works</title>
     <link rel="stylesheet" href="HowItWorks.css" />
+    <script src="script.js" defer></script>
   </head>
   <body>
     <div class="min-h-screen">
+      <!-- ✅ Proper navbar layout -->
       <div class="header">
-        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/7387288f561c5abfc229e8e25a5254d5e770b656" alt="" class="logo" />
-        <div>
-          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/51badf032b9702ce0f5f921203e3e3ff33361d49" alt="Research Match" class="logo-image" />
+        <div class="header-left">
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/7387288f561c5abfc229e8e25a5254d5e770b656"
+            alt="Logo"
+            class="logo"
+          />
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/51badf032b9702ce0f5f921203e3e3ff33361d49"
+            alt="Research Match"
+            class="logo-image"
+          />
         </div>
+
         <nav class="navigation">
           <a href="home.html" class="nav-link">Home</a>
           <a href="about.html" class="nav-link">About</a>
           <a href="search.html" class="nav-link">Explore</a>
           <a href="HowItWorks.html" class="nav-link">How it works</a>
-        </nav>        
-        <div class="theme-toggle">
-          <svg
-            width="70"
-            height="59"
-            viewBox="0 0 70 59"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            class="light-circle"
-          >
-            <ellipse
-              cx="35"
-              cy="29.5"
-              rx="35"
-              ry="29.5"
-              fill="#FCFCFC"
-            ></ellipse>
-          </svg>
+        </nav>
+
+        <div class="right-icons">
           <img
+            id="darkModeToggle"
             src="https://cdn.builder.io/api/v1/image/assets/TEMP/03961ef43cf487fbfd5436c4d9fe688589c1420a"
             alt="Toggle dark mode"
-            id="darkModeToggle"
-            class="light-icon"
+            class="dark-mode-icon"
           />
-          <div>
-            <svg
-              width="70"
-              height="59"
-              viewBox="0 0 70 59"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              class="light-circle"
-            >
-            </svg>
-          </div>
-          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/03961ef43cf487fbfd5436c4d9fe688589c1420a" alt="" class="light-icon" />
         </div>
       </div>
 
+      <!-- ✅ Hero Section -->
       <div class="hero-section">
         <div class="hero-title">How it Works</div>
         <div class="hero-description">
@@ -65,6 +50,7 @@
         </div>
       </div>
 
+      <!-- ✅ Features Section -->
       <div class="features-container">
         <div class="feature-item">
           <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/dcc80048842e769c0008ac5b698200475d650818" alt="" class="feature-icon" />
