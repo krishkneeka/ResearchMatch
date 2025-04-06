@@ -21,17 +21,21 @@
     width: 322px;
 }
 
-.nav-links {
+.navigation {
     display: flex;
-    gap: 80px;
-    margin-right: 64px;
+    gap: 3rem;
     margin-left: auto;
-}
-
-.nav-item {
-    font-size: 30px;
+    margin-right: 4rem;
+    align-items: center;
+  }
+  
+  .nav-link {
+    font-size: 1.875rem;
+    text-decoration: none;
     color: black;
-}
+    font-weight: 500;
+  }
+  
 
 .theme-toggle {
     position: relative;
