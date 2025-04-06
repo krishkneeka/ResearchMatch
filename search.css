@@ -164,18 +164,52 @@
   }  
   
   .view-more {
-    margin-top: 1rem;
-    font-size: 1.5rem;
-    background: none;
-    border: none;
-    cursor: pointer;
+    background: white;
+    border: 2px solid #4C6EF5;
+    color: #4C6EF5;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    padding: 10px 16px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.2s ease;
   }
+  
+  .view-more:hover {
+    background: #f0f3ff;
+    color: #3a57d3;
+    border-color: #3a57d3;
+  }
+  
+
+  button.im-interested {
+    background: linear-gradient(135deg, #5A9BF6, #4C6EF5);
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 6px 12px rgba(90, 155, 246, 0.3);
+    transition: all 0.2s ease;
+  }
+  
+  button.im-interested:hover {
+    background: linear-gradient(135deg, #4C6EF5, #3A57D3);
+    box-shadow: 0 8px 16px rgba(90, 155, 246, 0.45);
+    transform: translateY(-2px);
+  }
+  
 
   .action-buttons {
     display: flex;
-    gap: 10px;
-    margin-top: 10px;
+    justify-content: flex-start;
+    gap: 16px;
+    margin-top: 14px;
   }
+  
   
   .email-modal {
     position: fixed;
