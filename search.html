@@ -116,5 +116,64 @@
           }
         });
       </script>
+<script>
+    let allProfessors = [];
+  
+    // Load JSON data
+    async function loadProfessors() {
+      const res = await fetch("professors.json");
+      const data = await res.json();
+      allProfessors = data;
+    }
+  
+    // Search logic
+    function searchProfessors(query) {
+      query = query.toLowerCase();
+      return allProfessors.filter(p =>
+        p.name.toLowerCase().includes(query) ||
+        (p.title && p.title.toLowerCase().includes(query)) ||
+        (p.department && p.department.toLowerCase().includes(query))
+      );
+    }
+  
+    // Display cards
+    function displayResults(results) {
+      const grid = document.querySelector(".researcher-grid");
+      grid.innerHTML = "";
+  
+      results.forEach(p => {
+        const card = document.createElement("article");
+        card.className = "researcher-card";
+        card.innerHTML = `
+          <div class="researcher-content">
+            <img src="${p.image || 'https://cdn-icons-png.flaticon.com/512/1946/1946429.png'}" 
+                 alt="${p.name}" 
+                 class="researcher-photo">
+            <div class="researcher-info">
+              <h2 class="researcher-name">${p.name}</h2>
+              <h3 class="researcher-title">${p.title || "Professor at UTD"}</h3>
+              <p class="researcher-description">${p.department || "See profile for more info"}</p>
+              <a href="${p.profileUrl}" target="_blank" class="view-more">View Profile</a>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+  
+    // Load and filter on input
+    document.addEventListener("DOMContentLoaded", async () => {
+      await loadProfessors();
+      displayResults(allProfessors);
+  
+      const searchInput = document.querySelector(".search-input");
+      searchInput.addEventListener("input", () => {
+        const query = searchInput.value;
+        const results = searchProfessors(query);
+        displayResults(results);
+      });
+    });
+  </script>
+  
 </body>
 </html>
